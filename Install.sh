@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 脚本的目标 URL
-INSTALL_SCRIPT_URL="https://raw.github.com/Lozy/danted/master/install.sh -O install.sh"
+INSTALL_SCRIPT_URL="https://raw.github.com/Lozy/danted/master/install.sh"
 
 # 创建临时目录
 TEMP_DIR=$(mktemp -d)
