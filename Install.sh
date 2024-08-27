@@ -1,57 +1,36 @@
 #!/bin/bash
-#
-#   Dante Socks5 Server AutoInstall
-#   -- Owner:       
-#   -- Provider:    
-#   -- Author:      
-#
 
-# Check if user is root
-if [ $(id -u) != "0" ]; then
-    echo "Error: You must be root to run this script, please use root to install"
-    exit 1
+# 脚本的目标 URL
+INSTALL_SCRIPT_URL="https://raw.github.com/Lozy/danted/master/install.sh -O install.sh"
+
+# 创建临时目录
+TEMP_DIR=$(mktemp -d)
+INSTALL_SCRIPT_PATH="$TEMP_DIR/Install.sh"
+
+# 下载 Install.sh 文件
+echo "正在下载安装脚本..."
+curl -s -o "$INSTALL_SCRIPT_PATH" "$INSTALL_SCRIPT_URL"
+
+# 确保下载成功
+if [ ! -f "$INSTALL_SCRIPT_PATH" ]; then
+  echo "下载失败，请检查网络连接或 URL 是否正确。"
+  exit 1
 fi
 
-REQUEST_SERVER="https://raw.github.com/Lozy/danted/master"
-SCRIPT_SERVER="https://public.sockd.info"
-SYSTEM_RECOGNIZE=""
+# 询问用户输入端口、用户名和密码
+read -p "请输入端口号: " PORT
+read -p "请输入用户名: " USER
+read -sp "请输入密码: " PASSWD
+echo
 
-[ "$1" == "--no-github" ] && REQUEST_SERVER=${SCRIPT_SERVER}
+# 给予下载的脚本执行权限
+chmod +x "$INSTALL_SCRIPT_PATH"
 
-if [ -s "/etc/os-release" ];then
-    os_name=$(sed -n 's/PRETTY_NAME="\(.*\)"/\1/p' /etc/os-release)
+# 执行 Install.sh 脚本
+echo "正在启动 SOCKS5 代理服务..."
+"$INSTALL_SCRIPT_PATH" --port="$PORT" --user="$USER" --passwd="$PASSWD"
 
-    if [ -n "$(echo ${os_name} | grep -Ei 'Debian|Ubuntu' )" ];then
-        printf "Current OS: %s\n" "${os_name}"
-        SYSTEM_RECOGNIZE="debian"
+# 清理临时目录
+rm -rf "$TEMP_DIR"
 
-    elif [ -n "$(echo ${os_name} | grep -Ei 'CentOS')" ];then
-        printf "Current OS: %s\n" "${os_name}"
-        SYSTEM_RECOGNIZE="centos"
-    else
-        printf "Current OS: %s is not support.\n" "${os_name}"
-    fi
-elif [ -s "/etc/issue" ];then
-    if [ -n "$(grep -Ei 'CentOS' /etc/issue)" ];then
-        printf "Current OS: %s\n" "$(grep -Ei 'CentOS' /etc/issue)"
-        SYSTEM_RECOGNIZE="centos"
-    else
-        printf "+++++++++++++++++++++++\n"
-        cat /etc/issue
-        printf "+++++++++++++++++++++++\n"
-        printf "[Error] Current OS: is not available to support.\n"
-    fi
-else
-    printf "[Error] (/etc/os-release) OR (/etc/issue) not exist!\n"
-    printf "[Error] Current OS: is not available to support.\n"
-fi
-
-if [ -n "$SYSTEM_RECOGNIZE" ];then
-    wget -qO- --no-check-certificate ${REQUEST_SERVER}/install_${SYSTEM_RECOGNIZE}.sh | \
-        bash -s -- $*  | tee /tmp/danted_install.log
-else
-    printf "[Error] Installing terminated"
-    exit 1
-fi
-
-exit 0
+echo "SOCKS5 代理服务启动完成。"
