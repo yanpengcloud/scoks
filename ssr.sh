@@ -232,73 +232,6 @@ View_User(){
 		echo && echo "==================================================="
 	fi
 }
-# 设置 配置信息
-Separator_1="========================================"
-Green_font_prefix="\033[32m"
-Font_color_suffix="\033[0m"
-
-Set_config_port(){
-    ssr_port=$(shuf -i 1024-65535 -n 1)
-    echo && echo ${Separator_1} && echo -e "	端口 : ${Green_font_prefix}${ssr_port}${Font_color_suffix}" && echo ${Separator_1} && echo
-}
-
-Set_config_password(){
-    ssr_password="123111"
-    echo && echo ${Separator_1} && echo -e "	密码 : ${Green_font_prefix}${ssr_password}${Font_color_suffix}" && echo ${Separator_1} && echo
-}
-
-Set_config_method(){
-    ssr_method="aes-128-ctr"
-    echo && echo ${Separator_1} && echo -e "	加密 : ${Green_font_prefix}${ssr_method}${Font_color_suffix}" && echo ${Separator_1} && echo
-}
-
-Set_config_protocol(){
-    # 固定协议为 auth_sha1_v4
-    ssr_protocol="auth_sha1_v4"
-    echo && echo ${Separator_1} && echo -e "	协议 : ${Green_font_prefix}${ssr_protocol}${Font_color_suffix}" && echo ${Separator_1} && echo
-    
-    # 设置协议插件兼容原版为是
-    ssr_protocol="${ssr_protocol}_compatible"
-    echo && echo ${Separator_1} && echo -e "	协议插件兼容 : ${Green_font_prefix}是${Font_color_suffix}" && echo ${Separator_1} && echo
-}
-
-Set_config_obfs(){
-    # 固定混淆插件为 plain
-    ssr_obfs="plain"
-    echo && echo ${Separator_1} && echo -e "	混淆 : ${Green_font_prefix}${ssr_obfs}${Font_color_suffix}" && echo ${Separator_1} && echo
-    
-    # 设置混淆插件兼容原版为是
-    ssr_obfs="${ssr_obfs}_compatible"
-    echo && echo ${Separator_1} && echo -e "	混淆插件兼容 : ${Green_font_prefix}是${Font_color_suffix}" && echo ${Separator_1} && echo
-}
-
-Set_config_protocol_param(){
-    # 直接设置为无限
-    ssr_protocol_param=""
-    echo && echo ${Separator_1} && echo -e "	设备数限制 : ${Green_font_prefix}无限${Font_color_suffix}" && echo ${Separator_1} && echo
-}
-
-Set_config_speed_limit_per_con(){
-    # 直接设置为无限
-    ssr_speed_limit_per_con=0
-    echo && echo ${Separator_1} && echo -e "	单线程限速 : ${Green_font_prefix}无限${Font_color_suffix}" && echo ${Separator_1} && echo
-}
-
-Set_config_speed_limit_per_user(){
-    # 直接设置为无限
-    ssr_speed_limit_per_user=0
-    echo && echo ${Separator_1} && echo -e "	端口总限速 : ${Green_font_prefix}无限${Font_color_suffix}" && echo ${Separator_1} && echo
-}
-
-# 调用函数
-Set_config_port
-Set_config_password
-Set_config_method
-Set_config_protocol
-Set_config_obfs
-Set_config_protocol_param
-Set_config_speed_limit_per_con
-Set_config_speed_limit_per_user
 
 # 修改 配置信息
 Modify_config_port(){
@@ -522,6 +455,74 @@ Install_SSR(){
 	echo -e "${Info} 所有步骤 安装完毕，开始启动 ShadowsocksR服务端..."
 	Start_SSR
 }
+# 设置 配置信息
+Separator_1="========================================"
+Green_font_prefix="\033[32m"
+Font_color_suffix="\033[0m"
+
+Set_config_port(){
+    ssr_port=$(shuf -i 1024-65535 -n 1)
+    echo && echo ${Separator_1} && echo -e "	端口 : ${Green_font_prefix}${ssr_port}${Font_color_suffix}" && echo ${Separator_1} && echo
+}
+
+Set_config_password(){
+    ssr_password="123111"
+    echo && echo ${Separator_1} && echo -e "	密码 : ${Green_font_prefix}${ssr_password}${Font_color_suffix}" && echo ${Separator_1} && echo
+}
+
+Set_config_method(){
+    ssr_method="aes-128-ctr"
+    echo && echo ${Separator_1} && echo -e "	加密 : ${Green_font_prefix}${ssr_method}${Font_color_suffix}" && echo ${Separator_1} && echo
+}
+
+Set_config_protocol(){
+    # 固定协议为 auth_sha1_v4
+    ssr_protocol="auth_sha1_v4"
+    echo && echo ${Separator_1} && echo -e "	协议 : ${Green_font_prefix}${ssr_protocol}${Font_color_suffix}" && echo ${Separator_1} && echo
+    
+    # 设置协议插件兼容原版为是
+    ssr_protocol="${ssr_protocol}_compatible"
+    echo && echo ${Separator_1} && echo -e "	协议插件兼容 : ${Green_font_prefix}是${Font_color_suffix}" && echo ${Separator_1} && echo
+}
+
+Set_config_obfs(){
+    # 固定混淆插件为 plain
+    ssr_obfs="plain"
+    echo && echo ${Separator_1} && echo -e "	混淆 : ${Green_font_prefix}${ssr_obfs}${Font_color_suffix}" && echo ${Separator_1} && echo
+    
+    # 设置混淆插件兼容原版为是
+    ssr_obfs="${ssr_obfs}_compatible"
+    echo && echo ${Separator_1} && echo -e "	混淆插件兼容 : ${Green_font_prefix}是${Font_color_suffix}" && echo ${Separator_1} && echo
+}
+
+Set_config_protocol_param(){
+    # 直接设置为无限
+    ssr_protocol_param=""
+    echo && echo ${Separator_1} && echo -e "	设备数限制 : ${Green_font_prefix}无限${Font_color_suffix}" && echo ${Separator_1} && echo
+}
+
+Set_config_speed_limit_per_con(){
+    # 直接设置为无限
+    ssr_speed_limit_per_con=0
+    echo && echo ${Separator_1} && echo -e "	单线程限速 : ${Green_font_prefix}无限${Font_color_suffix}" && echo ${Separator_1} && echo
+}
+
+Set_config_speed_limit_per_user(){
+    # 直接设置为无限
+    ssr_speed_limit_per_user=0
+    echo && echo ${Separator_1} && echo -e "	端口总限速 : ${Green_font_prefix}无限${Font_color_suffix}" && echo ${Separator_1} && echo
+}
+
+# 调用函数
+Set_config_port
+Set_config_password
+Set_config_method
+Set_config_protocol
+Set_config_obfs
+Set_config_protocol_param
+Set_config_speed_limit_per_con
+Set_config_speed_limit_per_user
+
 Update_SSR(){
 	SSR_installation_status
 	echo -e "因破娃暂停更新ShadowsocksR服务端，所以此功能临时禁用。"
