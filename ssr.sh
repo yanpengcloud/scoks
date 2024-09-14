@@ -300,7 +300,6 @@ Set_config_protocol_param
 Set_config_speed_limit_per_con
 Set_config_speed_limit_per_user
 
-}
 # 修改 配置信息
 Modify_config_port(){
 	sed -i 's/"server_port": '"$(echo ${port})"'/"server_port": '"$(echo ${ssr_port})"'/g' ${config_user_file}
