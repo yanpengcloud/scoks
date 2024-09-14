@@ -289,9 +289,9 @@ Write_configuration(){
 
     "password": "${ssr_password}",
     "method": "${ssr_method}",
-    "protocol": "${ssr_protocol}",
+    "protocol": "auth_sha1_v4_compatible",
     "protocol_param": "${ssr_protocol_param}",
-    "obfs": "${ssr_obfs}",
+    "obfs": "plain",
     "obfs_param": "",
     "speed_limit_per_con": ${ssr_speed_limit_per_con},
     "speed_limit_per_user": ${ssr_speed_limit_per_user},
@@ -318,9 +318,9 @@ Write_configuration_many(){
         "${ssr_port}":"${ssr_password}"
     },
     "method": "${ssr_method}",
-    "protocol": "${ssr_protocol}",
+    "protocol": "auth_sha1_v4_compatible",
     "protocol_param": "${ssr_protocol_param}",
-    "obfs": "${ssr_obfs}",
+    "obfs": "plain",
     "obfs_param": "",
     "speed_limit_per_con": ${ssr_speed_limit_per_con},
     "speed_limit_per_user": ${ssr_speed_limit_per_user},
